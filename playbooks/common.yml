@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: yes
+  
+  tasks:
+    - name: Update and Upgrade servers
+      apt: upgrade=yes update_cache=yes cache_valid_time=84600
+      when: ansible_os_family == "Debian"
+    
+    - name: Update and Upgrade servers
+      yum: name=* state=latest
+      when: ansible_os_family == "RedHat"
+     
+    - name: Create a common directory
+      file: path=/audit/more_logs state=directory mode=0755
+
+    - name: Install a common package for all servers
+      apt: name=nfs-client
+      when: ansible_os_family == "Debian"
+
+    - name: Install a common package for all servers
+      yum: name=nfs-utils
+      when: ansible_os_family == "RedHat"
+
+    - name: Set Timezone to America/NewYork
+      timezone: name=America/New_York 
+
+

@@ -1,0 +1,14 @@
+[nfs]
+nfsserver
+ 
+[webservers]
+webserver1
+webserver2
+webserver3
+ 
+[db]
+dbserver
+ 
+[jenkins-master]
+jenkinsmaster
+
